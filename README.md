@@ -24,3 +24,45 @@ dockerhub_username: ваш_логин_на_докерхабе
 - Проект Kittygram доступен по доменному имени, указанному в `tests.yml`.
 - Пуш в ветку main запускает тестирование и деплой Kittygram, а после успешного деплоя вам приходит сообщение в телеграм.
 - В корне проекта есть файл `kittygram_workflow.yml`.
+
+## Описание проекта
+
+Киттиграм - это сайт на котором пользователи могут выкладывать фотографии котиков и описывать их характеристики и достижения. 
+
+## Как запустить проект. 
+
+1. Склонируйте форкнутый репозиторий 
+```yaml
+git@github.com:username/kittygram_final.git
+```
+2. Установите докер
+```
+sudo apt update
+sudo apt install curl
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+sudo apt install docker-compose
+```
+3. Создайте и заполните файл .env 
+
+4. В файле main.yml измените значения с оригинальным логином на ваш(логины докерхаб и гитхаб)
+
+5. Измените настройки внешнего Nginx 
+```
+location / {
+    proxy_set_header Host $http_host;
+    proxy_pass http://127.0.0.1:9000;
+}
+```
+6. Добавьте секреты в GitHub Actions:
+```
+DOCKER_USERNAME                # имя пользователя в DockerHub
+DOCKER_PASSWORD                # пароль пользователя в DockerHub
+HOST                           # IP-адрес сервера
+USER                           # имя пользователя
+SSH_KEY                        # содержимое закрытого SSH-ключа
+SSH_PASSPHRASE                 # пароль для SSH-ключа
+
+TELEGRAM_TO                    # ID вашего телеграм-аккаунта (можно узнать у @userinfobot, команда /start)
+TELEGRAM_TOKEN                 # токен вашего бота (получить токен можно у @BotFather, команда /token, имя бота)
+```
