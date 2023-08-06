@@ -7,6 +7,7 @@ from rest_framework import routers
 
 from cats.views import AchievementViewSet, CatViewSet
 
+
 router = routers.DefaultRouter()
 router.register('cats', CatViewSet)
 router.register('achievements', AchievementViewSet)
