@@ -9,7 +9,10 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', get_random_secret_key())
+if 'SECRET_KEY' not in os.environ:
+    raise Exception('Секретный ключ не найден')
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', '').lower() == 'true'
 
